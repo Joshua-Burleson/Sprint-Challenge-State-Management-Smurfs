@@ -12,6 +12,17 @@ export const editSmurf = smurf => dispatch => {
 };
 
 
+export const deleteSmurf = smurf => dispatch => {
+    console.log(smurf)
+    axios.delete(`http://127.0.0.1:3333/smurfs/${smurf.id}`, smurf)
+    .then(res => {
+        console.log('update successful', res);
+        dispatch({type: 'UPDATE_SMURF', payload: res.data});
+       })
+    .catch(err => console.log('ERROR: ', err));
+};
+
+
 export const refreshSmurfs = (type) => dispatch => {
     dispatch({type: 'LOADING'});
     axios.get('http://127.0.0.1:3333/smurfs')

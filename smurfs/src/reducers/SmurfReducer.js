@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 const initialState = {
     smurfs: [{
         name: 'Test Smurf',
@@ -9,6 +11,14 @@ const initialState = {
         status: false,
         smurf: {}
     }};
+
+    const deleteSmurf = smurf => {
+        axios.delete(`http://127.0.0.1:3333/smurfs/${smurf.id}`, smurf)
+        .then(res => {
+            console.log('update successful', res);
+           })
+        .catch(err => console.log('ERROR: ', err));
+    };
 
 
 
@@ -32,7 +42,10 @@ export const smurfReducer = (state = initialState, action) => {
 
         case('EDIT_SMURF'): 
                 console.log('Editing');
-                return{...state, editing: {status: true, smurf: action.payload.smurf}}
+                return{...state, editing: {status: true, smurf: action.payload.smurf}};
+
+        case('DELETE_SMURF'):
+                deleteSmurf(action.payload.smurf);
 
         default:
                 return {...state};
