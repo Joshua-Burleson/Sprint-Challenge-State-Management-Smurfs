@@ -11,6 +11,10 @@ import { Provider } from 'react-redux';
 import Smurfs from './Smurfs';
 import SmurfForm from "./SmurfForm";
 
+// Styles
+import AppHeader from './styles/AppHeader';
+import AppWrapper from "./styles/AppWrapper";
+
 
 const store = createStore(smurfReducer, applyMiddleware(thunk));
 
@@ -18,13 +22,15 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <div className="App">
-          <h1>SMURFS! 2.0 W/ Redux</h1>
-          <div>Welcome to your state management version of Smurfs!</div>
-          <div>Have fun!</div>
+          <AppHeader>
+            <h1>SMURFS! 2.0 W/ Redux</h1>
+            <div>Welcome to your state management version of Smurfs!</div>
+            <div>Have fun!</div>
+          </AppHeader>
+          <AppWrapper className="App">
           <Smurfs />
           <SmurfForm />
-        </div>
+        </AppWrapper>
       </Provider>
     );
   }
