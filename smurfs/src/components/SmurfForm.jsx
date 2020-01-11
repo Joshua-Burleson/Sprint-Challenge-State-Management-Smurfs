@@ -10,7 +10,7 @@ const SmurfForm = props => {
         height: ''
     });
 
-    const [editSmurf, setEditSmurf] = useState();
+    const [editSmurf, setEditSmurf] = useState(false);
 
     useEffect(() => {
         setEditSmurf(props.editData.smurf);
@@ -21,7 +21,11 @@ const SmurfForm = props => {
         event.preventDefault();
         console.log('Current Smurf: ', thisSmurf);
         props.editData.status ? props.editSmurf(editSmurf) : props.addSmurf(thisSmurf);
-        setSmurf('');
+        setSmurf({
+            name: '',
+            age: '',
+            height: ''
+        });
         setEditSmurf('');
     }
 
@@ -41,9 +45,9 @@ const SmurfForm = props => {
 
     return(
         <FormForSmurf>
-            <h2>Add a Smurf!</h2>
+            <h2>{Object.keys(editSmurf).length > 1 ? 'Edit' : 'Add'} a Smurf!</h2>
             <input type='text' name='name' placeholder='Name' onChange={handleChange} value={editSmurf ? editSmurf.name : thisSmurf.name}></input>
-            <input type='number' name='age' placeholder='Age' onChange={handleChange} value={editSmurf ? Number(editSmurf.age) : thisSmurf.age}></input>
+            <input type='number' name='age' placeholder='Age' onChange={handleChange} value={editSmurf ? String(editSmurf.age) : thisSmurf.age}></input>
             <input type='text' name='height' placeholder='Height' onChange={handleChange} value={editSmurf ? editSmurf.height : thisSmurf.height}></input>
             <input type='submit' onClick={handleSubmit}></input>
         </FormForSmurf>

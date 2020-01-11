@@ -12,7 +12,7 @@ const Smurfs = (props) => {
     return(
         <div>
             {   props.state.loading ? <h2>Loading...</h2> : 
-                props.state.smurfs.map(smurf => <Smurf smurf={smurf} />)
+                props.state.smurfs.map(smurf => <Smurf key={smurf.name+smurf.id} smurf={smurf} />)
             }
         </div>
     )
