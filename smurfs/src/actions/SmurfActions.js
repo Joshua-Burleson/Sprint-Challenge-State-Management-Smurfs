@@ -36,6 +36,7 @@ export const refreshSmurfs = (type) => dispatch => {
 
 
 export const addSmurf = (newSmurf) => dispatch => {
+    console.log(newSmurf);
     dispatch({type: 'LOADING'});
     axios.post('http://127.0.0.1:3333/smurfs', newSmurf)
          .then(res => {

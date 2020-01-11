@@ -6,7 +6,7 @@ import FormForSmurf from './styles/FormForSmurf';
 const SmurfForm = props => {
     const [thisSmurf, setSmurf] = useState({
         name: '',
-        age: '',
+        age: null,
         height: ''
     });
 
@@ -19,8 +19,16 @@ const SmurfForm = props => {
 
     const handleSubmit = event => {
         event.preventDefault();
-        console.log('Current Smurf: ', thisSmurf);
-        props.editData.status ? props.editSmurf(editSmurf) : props.addSmurf(thisSmurf);
+
+        console.log(thisSmurf, editSmurf)
+
+        const theSmurf = props.editData.status ? editSmurf : thisSmurf;
+
+        if(!theSmurf.height.includes('cm')) theSmurf.height = theSmurf.height+'cm';
+          
+        console.log('EDIT IS ON? ', props.editData.status)
+
+        props.editData.status ? props.editSmurf(theSmurf) : props.addSmurf(theSmurf);
         setSmurf({
             name: '',
             age: '',
@@ -31,12 +39,14 @@ const SmurfForm = props => {
 
     const handleChange = event => {
         const key = event.target.name;
+        
+        console.log(key)
 
         const updateSelectedState = (stateSetter, state) => {
             stateSetter({...state, [key]: event.target.value});
         }
 
-        editSmurf ? updateSelectedState(setEditSmurf, editSmurf) : updateSelectedState(setSmurf, thisSmurf)
+        props.editData.status === true ? updateSelectedState(setEditSmurf, editSmurf) : updateSelectedState(setSmurf, thisSmurf)
 
     }
 
@@ -47,7 +57,7 @@ const SmurfForm = props => {
         <FormForSmurf>
             <h2>{Object.keys(editSmurf).length > 1 ? 'Edit' : 'Add'} a Smurf!</h2>
             <input type='text' name='name' placeholder='Name' onChange={handleChange} value={editSmurf ? editSmurf.name : thisSmurf.name}></input>
-            <input type='number' name='age' placeholder='Age' onChange={handleChange} value={editSmurf ? String(editSmurf.age) : thisSmurf.age}></input>
+            <input type='number' name='age' placeholder='Age' onChange={handleChange} value={editSmurf ? Number(editSmurf.age) : thisSmurf.age}></input>
             <input type='text' name='height' placeholder='Height' onChange={handleChange} value={editSmurf ? editSmurf.height : thisSmurf.height}></input>
             <input type='submit' onClick={handleSubmit}></input>
         </FormForSmurf>

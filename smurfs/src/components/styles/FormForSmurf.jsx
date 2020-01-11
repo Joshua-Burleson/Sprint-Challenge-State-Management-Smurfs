@@ -8,6 +8,7 @@ export default styled.form`
     height: 25vh;
     width: 40vw;
     padding: 10px;
+    
     input[type="text"], input[type="number"]{
         width: 45%;
         height: 12%;

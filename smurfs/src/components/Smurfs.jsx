@@ -8,7 +8,7 @@ import Smurf from './Smurf';
 const Smurfs = (props) => {
     //onMount load current DB data from API
     useEffect(() => props.refreshSmurfs(), []);
-    console.log(props)
+
     return(
         <div>
             {   props.state.loading ? <h2>Loading...</h2> : 

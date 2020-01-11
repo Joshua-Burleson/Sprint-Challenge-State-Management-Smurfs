@@ -7,4 +7,8 @@ export default styled.div`
     height: fit-content;
     border: 2px solid white;
     background: lightblue;
+    
+    h3{
+        margin-top: -10px;
+    }
 `;
